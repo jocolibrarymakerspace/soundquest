@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+# -*- coding: utf8 -*-
+
+#This is the SoudQuest audio treasure hunt game for the Johnson County Library.
+#An original idea by Maker in Residence Laura Spencer, Local Arts Journalist at KCUR
+#Complete tutorial at [COMING SOON]
+#Original Arduino project at [COMING SOON]
+
+#Links
+#Johnson County Library - http://jocolibrary.org/
+#Johnson County Library MakerSpace - https://www.jocolibrary.org/we-recommend/listen-local
+#KCUR - http://kcur.org/
+#Laura Spencer at KCUR - http://kcur.org/people/laura-spencer
+
+#This project requires:
+#-RPi.GPIO - https://pypi.python.org/pypi/RPi.GPIO
+#- VLC-python bindings from https://github.com/oaubert/python-vlc
+
+#Resources
+#Raspberry Pi GPIO pins and Python - https://makezine.com/projects/tutorial-raspberry-pi-gpio-pins-and-python/
+#Playing sounds and using buttons in Raspberry Pi - https://learn.adafruit.com/playing-sounds-and-using-buttons-with-raspberry-pi/overview
+#Detecting a button press through GPIO - http://www.raspberrywebserver.com/gpio/detecting-a-button-press-through-GPIO.html
+
+#---Code begins below this line!---
+
+
+#We import the time module
+import time
+
+#We import the signal library
+import signal
+
+#We create a list to store user input
+input_sequence = []
+
+#We create a variable to process user input
+button_sequence = ()
+
+#Create lists to store and compare sequences
+prev_sequence = ()
+
+# Welcome message
+print ("Welcome to the SOUNDQUEST")
+
+# This loop keeps checking for RFID tags. If one is near it will get the UID.
+while True:
+    message = "\nType in the test sequence" #DEBUG - We define the message to the player
+    message += "\nOptions include: 12345, 54321, 45123, 32154, 45321" #DEBUG - #We define available testing options
+    message += "\nPress q anytime to leave " #DEBUG - #We define available testing options
+    
+    input_sequence.append(input(message)) #We append user input to the list
+
+    button_sequence = ''.join(map(str, input_sequence)) #We turn the input_sequence list content into a button_sequence string for processing
+    print(button_sequence) #We print the contents of button_sequence
+    input_sequence = [] #We reset the contents of input_sequence
+    button_sequence = () #We reset the contents of button_sequence
+    
+#    break #DEBUG - We stop the program
+
+#    prev_sequence = button_sequence #We store the latest input sequence for later
+#    print (prev_sequence) #DEBUG - We check that button_sequence has been stored correctly
+
+#And we do it all over again!
